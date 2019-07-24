@@ -5,6 +5,8 @@ const app = express();
 
 if(NODE_ENV === 'development') app.use(morgan('dev'));
 
+app.use('/api/courses', require('./api/routes/courses'));
+
 const listener = () => console.log('working!!!!!')
 app.listen(PORT, listener);
 
