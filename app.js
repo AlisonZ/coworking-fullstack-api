@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const app = express();
 
 if (MONGO_DB) {
-    mongoose.connect(MONGO_DB, {useNewUrlParser: true});
+    const options = { useFindAndModify: false, useNewUrlParser: true, }
+    mongoose.connect(MONGO_DB, options);
     console.log('connected to mongoose');
 } else {
     console.log('not connected to mongo database');
