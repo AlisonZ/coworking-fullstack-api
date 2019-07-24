@@ -1,8 +1,9 @@
-const { PORT } = process.env;
+const { NODE_ENV ,PORT } = process.env;
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
-//body-parser
-//morgan
+
+if(NODE_ENV === 'development') app.use(morgan('dev'));
 
 const listener = () => console.log('working!!!!!')
 app.listen(PORT, listener);
