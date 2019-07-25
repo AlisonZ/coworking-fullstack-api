@@ -36,14 +36,26 @@ router.get('/', async (req, res, next) => {
 
 });
 
+router.patch('/:id', async(req, res, next) => {
+    const status = 201;
+    const filter = { _id: req.params.id};
+    const update = req.body;
+
+    let response = await Units.findOneAndUpdate(filter, update, {
+        new: true
+    });
+
+    res.json({ status, response });
+    
+        //TODO: add 404 if ID not found
+});
+
+//this is for me to get some data in db to play with
 router.post('/', async (req, res, next) => {
     console.log('in the units post', req.body);
     const status = 201;
 
     const response = await Units.create(req.body);
-    // const response = await Units.find();
-    // console.log('this is the created unit', unit);
-
     res.json({ status, response});
 
 
