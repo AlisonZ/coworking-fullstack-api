@@ -13,6 +13,7 @@ if (MONGO_DB) {
 }
 
 if(NODE_ENV === 'development') app.use(morgan('dev'));
+app.use(require('body-parser').json())
 
 app.use('/api/units', require('./api/routes/units'));
 
