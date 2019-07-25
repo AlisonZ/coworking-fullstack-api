@@ -7,15 +7,15 @@ const app = express();
 if (MONGO_DB) {
     const options = { useFindAndModify: false, useNewUrlParser: true, }
     mongoose.connect(MONGO_DB, options);
-    console.log('connected to mongoose');
+    // console.log('connected to mongoose');
 } else {
     console.log('not connected to mongo database');
 }
 
 if(NODE_ENV === 'development') app.use(morgan('dev'));
 
-app.use('/api/courses', require('./api/routes/courses'));
+app.use('/api/units', require('./api/routes/units'));
 
-const listener = () => console.log('working!!!!!')
+const listener = () => console.log('app is working')
 app.listen(PORT, listener);
 
