@@ -8,12 +8,17 @@ const schema = new Units({
         required: true
     },
     floor: {
-        type: Number,
+      //TODO: change this to Number and deal with num/string conversion in route
+        type: String,
         required: true
     },
     special_monthly_offer: {
         type: Number,
         required: false
+    },
+    occupied: {
+      type: String, 
+      required: false
     },
     // //Q: should this be a model itself?
     company: [

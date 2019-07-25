@@ -7,7 +7,6 @@ router.get('/', async (req, res, next) => {
     const response = await Units.find();
 
     if (req.query.kind) {
-        // console.log('searched by a kind query', req.query.kind);
         const filteredByKindResponse = [];
         response.forEach((unit) => {
             if (unit.kind === req.query.kind) {
@@ -27,13 +26,11 @@ router.get('/', async (req, res, next) => {
         const filteredByOccupiedStatusResponse = [];
         response.forEach((unit) => {
             if (unit.occupied === req.query.occupied) {
-                filteredByOccupiedStatusResponse.push();
+                filteredByOccupiedStatusResponse.push(unit);
             }
         });
-        return res.json({ status, response });
-    }
-    
-    else {
+        return res.json({ status, filteredByOccupiedStatusResponse });
+    } else {
         return res.json({ status, response });
     }
 
