@@ -34,7 +34,7 @@ Your API should include the following routes with the specified functionality.
 - [X] [GET /api/v1/units?kind=[kind]](#GET-apiv1unitskindkind)
 - [X] [GET /api/v1/units?floor=[integer]](#GET-apiv1unitsfloorinteger)
 - [X] [GET /api/v1/units?occupied=[true/false]](#GET-apiv1unitsoccupiedtruefalse)
-- [ ] [PATCH /api/v1/units/[id]](#PATCH-apiv1unitsid)
+- [X] [PATCH /api/v1/units/[id]](#PATCH-apiv1unitsid)
 
 - [ ] [PATCH /api/v1/units/[id]/company](#PATCH-apiv1unitsidcompany)
 - [ ] [DELETE /api/v1/units/[id]/company](#DELETE-apiv1unitsidcompany)

@@ -41,7 +41,22 @@ router.get('/', async (req, res, next) => {
     } else {
         return res.json({ status, response });
     }
+});
 
+router.patch('/:id', async(req, res, next) => {
+    const status = 201;
+    const filter = { _id: req.params.id};
+    const update = req.body;
+    console.log('filter', filter);
+    console.log('update', update);
+
+    let response = await Units.findOneAndUpdate(filter, update, {
+        new: true
+    });
+
+    res.json({ status, response });
+
+    //TODO: add 404 if ID not found
 });
 
 
