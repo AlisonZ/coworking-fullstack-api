@@ -24,11 +24,19 @@ router.get('/', async (req, res, next) => {
         return res.json({ status, filteredByFloorResponse });
     } else if (req.query.occupied) {
         const filteredByOccupiedStatusResponse = [];
-        response.forEach((unit) => {
-            if (unit.occupied === req.query.occupied) {
-                filteredByOccupiedStatusResponse.push(unit);
-            }
-        });
+        if(req.query.occupied === "true") {
+            response.forEach((unit) => {
+                if (unit.company.name !== "unoccupied") {
+                    filteredByOccupiedStatusResponse.push(unit);
+                }
+            });
+        } else if (req.query.occupied === "false") {
+            response.forEach((unit) => {
+                if (unit.company.name === "unoccupied") {
+                    filteredByOccupiedStatusResponse.push(unit)
+                }
+            });
+        }
         return res.json({ status, filteredByOccupiedStatusResponse });
     } else {
         return res.json({ status, response });
