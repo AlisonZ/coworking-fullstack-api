@@ -50,6 +50,31 @@ router.patch('/:id', async(req, res, next) => {
         //TODO: add 404 if ID not found
 });
 
+router.patch('/:id/company', async (req, res, next) => {
+    const status = 201;
+    // const filter = { _id: req.params.id};
+    const update = req.body;
+    // console.log('reqqqq', req.body);
+
+   
+
+    const { company } = await Units.findById(req.params.id).select('company');    
+    // console.log('comppp', company);
+    
+
+    const response = await Units.findOneAndUpdate(company, update);
+
+  
+
+    // const response = await Units.findById(req.params.id);
+
+    res.json({ status, response });
+
+
+
+    //TODO: add 404 if ID not found
+});
+
 //this is for me to get some data in db to play with
 router.post('/', async (req, res, next) => {
     console.log('in the units post', req.body);

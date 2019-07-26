@@ -16,12 +16,16 @@ const schema = new Units({
         type: Number,
         required: false
     },
+    //TODO: rework the routing logic so that this field is not necessary
+    //instead of having an explicit field of 'occupied' can base this logic off of
+    //the presence or absence of a company name in the company section
+    //maybe? but why is there an array of companies per one unit?
     occupied: {
       type: String, 
       required: false
     },
     // //Q: should this be a model itself?
-    company: [
+    company: 
         {
             name: {
                 type: String, 
@@ -53,7 +57,7 @@ const schema = new Units({
                 }
             ]
         }
-    ],
+    ,
   }
 // }, {createdAt: 'created_at', updatedAt: 'updated_at'}
 );
