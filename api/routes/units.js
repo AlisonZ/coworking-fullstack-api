@@ -54,8 +54,6 @@ router.patch('/:id', async(req, res, next) => {
     const status = 201;
     const filter = { _id: req.params.id};
     const update = req.body;
-    console.log('filter', filter);
-    console.log('update', update);
 
     let response = await Units.findOneAndUpdate(filter, update, {
         new: true
@@ -66,6 +64,18 @@ router.patch('/:id', async(req, res, next) => {
     //TODO: add 404 if ID not found
 });
 
+//TODO: change to patch and actually patch
+router.patch('/:id/company', async(req, res, next) => {
+    const status = 201;
+    const unit = await Units.findById(req.params.id);
+    unit.company = req.body;
+    unit.save();
+    
+    //TODO: response is not updating correctly, but correct in dB
+    let response = await Units.findById(req.params.id);
+
+    res.json({ status, response });
+});
 
 
 //this is for me to get some data in db to play with

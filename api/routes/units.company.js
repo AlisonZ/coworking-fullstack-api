@@ -1,13 +1,13 @@
 const router = require('express').Router({ mergeParams: true });
-const Units = require('../models/units');
+// const Units = require('../models/units');
 
-router.get('/', async(req, res, next) => {
-    const status = 200;
-    const { company } = await Units.findById(req.params.unitId);
+// router.get('/', async(req, res, next) => {
 
-    // Can not determine why this .select() is not working
-    // const { authors } = await Books.findById(req.params.bookId).select(publicKey);
+//     console.log('in the company get');
+//     // const status = 200;
+//     // const { company } = await Units.findById(req.params.unitId);
 
-    res.json({ status, company});
-});
+//     // res.json({ status, company});
+// });
+
 module.exports = router;
