@@ -15,7 +15,9 @@ if (MONGO_DB) {
 if(NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(require('body-parser').json())
 
+//Routes
 app.use('/api/units', require('./api/routes/units'));
+app.use('/api/units/:unitId/companies', require('./api/routes/units.companies'));
 
 const listener = () => console.log('app is working')
 app.listen(PORT, listener);
