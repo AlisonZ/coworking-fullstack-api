@@ -18,7 +18,7 @@ const schema = new Units({
     },
 
     //this might not need to be an array because there is only one company in each unit at this time
-    company:{
+    company:[{
       name: {type: String, required: true}, 
       contact_email: {type: String, required: true},
       employees: [{
@@ -30,7 +30,7 @@ const schema = new Units({
         //TODO: validate email 
         email: {type: String, required: true}
       }]
-    }
+    }]
   }, {createdAt: 'created_at', updatedAt: 'updated_at'}
 );
 

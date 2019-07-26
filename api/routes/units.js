@@ -43,6 +43,13 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:id', async(req, res, next) => {
+    const status = 200;
+    const response = await Units.findById(req.params.id)
+
+    res.json({ status, response });
+}); 
+
 router.patch('/:id', async(req, res, next) => {
     const status = 201;
     const filter = { _id: req.params.id};
@@ -58,6 +65,8 @@ router.patch('/:id', async(req, res, next) => {
 
     //TODO: add 404 if ID not found
 });
+
+
 
 //this is for me to get some data in db to play with
 router.post('/', async (req, res, next) => {
