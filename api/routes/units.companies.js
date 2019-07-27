@@ -14,40 +14,26 @@ router.post('/', async(req, res, next) => {
 
     unit.companies = req.body;
     await unit.save();
-    //not really liking this const,
+    
     const company = unit.companies;
 
     res.json({ status, company });
 });
 
-//TODO: make this work --> this is not functional at all
 router.patch('/', async(req, res, next) => {
     const status = 201;
     const unit = await Units.findById(req.params.unitId);
+    const company = unit.companies[0];
+    Object.assign(company, req.body);
+    await unit.save();
 
-    unit.update(
-        {
-            _id: req.params.unitId
-        },
-        {
-            $set: {
-                "name":  "new nammmmmmeeeeee"
-            }
-        }
-     )
-
-    // console.log('request body', req.body);
-    // console.log('unit', unit);
-
-    // res.json({ status, response });
+    res.json({ status, unit });
 });
 
 router.delete('/', async(req, res, next) => {
     const status = 200;
     const unit = await Units.findById(req.params.unitId);
 
-    //if there is a change where multiple companies can share one unit
-    //replace this [0] index by finding by the id and having the id be part of the params
     const company = unit.companies[0].remove();
 
     unit.save();

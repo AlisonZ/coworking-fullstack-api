@@ -36,13 +36,13 @@ Your API should include the following routes with the specified functionality.
 - [X] [GET /api/v1/units?occupied=[true/false]](#GET-apiv1unitsoccupiedtruefalse)
 - [X] [PATCH /api/v1/units/[id]](#PATCH-apiv1unitsid)
 
-- [ ] [PATCH /api/v1/units/[id]/company](#PATCH-apiv1unitsidcompany)
+- [X] [PATCH /api/v1/units/[id]/company](#PATCH-apiv1unitsidcompany)
 - [X] [DELETE /api/v1/units/[id]/company](#DELETE-apiv1unitsidcompany)
 
 - [X] [GET /api/v1/units/[id]/company/employees](#GET-apiv1unitsidcompanyemployees)
 - [X] [GET /api/v1/units/[id]/company/employees/[id]](#GET-apiv1unitsidcompanyemployeesid)
 - [X] [POST /api/v1/units/[id]/company/employees](#POST-apiv1unitsidcompanyemployees)
-- [ ] [PATCH /api/v1/units/[id]/company/employees/[id]](#PATCH-apiv1unitsidcompanyemployeesid)
+- [X] [PATCH /api/v1/units/[id]/company/employees/[id]](#PATCH-apiv1unitsidcompanyemployeesid)
 - [X] [DELETE /api/v1/units/[id]/company/employees/[id]](#DELETE-apiv1unitsidcompanyemployeesid)
 
 - [X] [GET /api/v1/companies](#GET-apiv1companies)

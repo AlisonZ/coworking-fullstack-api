@@ -19,7 +19,6 @@ router.get('/', async (req, res, next) => {
                 response.push(unit);
             }
         });
-        // return res.json({ status, filteredByFloorResponse });
     } else if (req.query.occupied) {
         if(req.query.occupied === "true") {
             units.forEach((unit) => {
@@ -62,22 +61,6 @@ router.patch('/:id', async(req, res, next) => {
     //TODO: add 404 if ID not found
 });
 
-//TODO: change to patch and actually patch
-// router.patch('/:id/company', async(req, res, next) => {
-//     console.log('boooooooo')
-//     const status = 201;
-//     const unit = await Units.findById(req.params.id);
-//     unit.company = req.body;
-//     unit.save();
-    
-//     //TODO: response is not updating correctly, but correct in dB
-//     let response = await Units.findById(req.params.id);
-
-//     res.json({ status, response });
-// });
-
-
-//this is for me to get some data in db to play with
 router.post('/', async (req, res, next) => {
     const status = 201;
 

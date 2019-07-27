@@ -33,12 +33,27 @@ router.post('/', async(req, res, next) => {
     res.json({ status, employee });
 });
 
+router.patch('/:id', async(req, res, next) => {
+    const status = 201;
+    const unit = await Units.findById(req.params.unitId);
+    const company = unit.companies[0];
+    let response;
+
+
+    company.employees.forEach((employee) => {
+        if(employee._id.toString() === req.params.id) {
+            response = employee;
+            Object.assign(response, req.body)
+        }
+    });
+
+    res.json({ status, response });
+});
+ 
 router.delete('/:id', async(req, res, next) => {
     const status = 200;
     const unit = await Units.findById(req.params.unitId);
 
-    // const employee = await unit.companies[0].employees(req.params.id);
-    // const { employees } = await unit.companies[0].employees.id(req.params.id).remove();
     const { employees } = await unit.companies[0];
     const employee = await employees.id(req.params.id).remove();
 
