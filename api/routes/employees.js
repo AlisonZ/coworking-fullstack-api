@@ -22,6 +22,14 @@ router.get('/', async(req, res, next) => {
                 response.push(employeeName);
             }
         });
+    } 
+
+    if(req.query.birthday) {
+        employees.forEach((employee) => {
+            if(req.query.birthday === employee.date_of_birth) {
+                response.push(employee);
+            }
+        });
     }
 
     res.json({ status, response });
