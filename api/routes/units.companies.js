@@ -20,6 +20,27 @@ router.post('/', async(req, res, next) => {
     res.json({ status, company });
 });
 
+router.patch('/', async(req, res, next) => {
+    const status = 201;
+    const unit = await Units.findById(req.params.unitId);
+
+    unit.update(
+        {
+            _id: req.params.unitId
+        },
+        {
+            $set: {
+                "name":  "new nammmmmmeeeeee"
+            }
+        }
+     )
+
+    // console.log('request body', req.body);
+    // console.log('unit', unit);
+
+    // res.json({ status, response });
+});
+
 router.delete('/', async(req, res, next) => {
     const status = 200;
     const unit = await Units.findById(req.params.unitId);

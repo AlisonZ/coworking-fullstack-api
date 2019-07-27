@@ -24,16 +24,20 @@ router.get('/', async (req, res, next) => {
         return res.json({ status, filteredByFloorResponse });
     } else if (req.query.occupied) {
         const filteredByOccupiedStatusResponse = [];
+        // response.forEach((unit) => {
+        //     // console.log('unit', unit.companies.length === 0);
+
+        // })
         if(req.query.occupied === "true") {
             response.forEach((unit) => {
-                if (unit.company.name !== "unoccupied") {
+                if(unit.companies.length >= 1) {
                     filteredByOccupiedStatusResponse.push(unit);
                 }
             });
-        } else if (req.query.occupied === "false") {
+        } else if(req.query.occupied === "false") {
             response.forEach((unit) => {
-                if (unit.company.name === "unoccupied") {
-                    filteredByOccupiedStatusResponse.push(unit)
+                if(unit.companies.length === 0) {
+                    filteredByOccupiedStatusResponse.push(unit);
                 }
             });
         }
@@ -65,17 +69,18 @@ router.patch('/:id', async(req, res, next) => {
 });
 
 //TODO: change to patch and actually patch
-router.patch('/:id/company', async(req, res, next) => {
-    const status = 201;
-    const unit = await Units.findById(req.params.id);
-    unit.company = req.body;
-    unit.save();
+// router.patch('/:id/company', async(req, res, next) => {
+//     console.log('boooooooo')
+//     const status = 201;
+//     const unit = await Units.findById(req.params.id);
+//     unit.company = req.body;
+//     unit.save();
     
-    //TODO: response is not updating correctly, but correct in dB
-    let response = await Units.findById(req.params.id);
+//     //TODO: response is not updating correctly, but correct in dB
+//     let response = await Units.findById(req.params.id);
 
-    res.json({ status, response });
-});
+//     res.json({ status, response });
+// });
 
 
 //this is for me to get some data in db to play with
