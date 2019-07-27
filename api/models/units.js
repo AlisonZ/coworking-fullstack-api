@@ -30,7 +30,7 @@ const schema = new Units({
         //TODO: validate email 
         email: {type: String, required: true}
       }]
-    }]
+    }],
   }, {createdAt: 'created_at', updatedAt: 'updated_at'}
 );
 

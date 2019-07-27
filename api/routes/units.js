@@ -23,13 +23,13 @@ router.get('/', async (req, res, next) => {
         } else if (req.query.occupied) {
             if(req.query.occupied === "true") {
                 units.forEach((unit) => {
-                    if(unit.companies.length >= 1) {
+                    if(unit.company.length >= 1) {
                         response.push(unit);
                     }
                 });
             } else if(req.query.occupied === "false") {
                 units.forEach((unit) => {
-                    if(unit.companies.length === 0) {
+                    if(unit.company.length === 0) {
                         response.push(unit);
                     }
                 });
@@ -50,18 +50,26 @@ router.get('/:id', async(req, res, next) => {
     res.json({ status, response });
 }); 
 
+//could not for the life of me get this to work for the company
+//believe it is because of the array behavior??
+//also spent too much time trying to figure out how to 
+//post a unit without a company with the companies as an object instead of array
 router.patch('/:id', async(req, res, next) => {
-    const status = 201;
-    const filter = { _id: req.params.id};
-    const update = req.body;
-
-    let response = await Units.findOneAndUpdate(filter, update, {
-        new: true
-    });
-
-    res.json({ status, response });
-
-    //TODO: add 404 if ID not found
+    try {
+        const status = 201;
+        const filter = { _id: req.params.id};
+        const update = req.body;
+    
+        let response = await Units.findOneAndUpdate(filter, update, {
+            new: true
+        });
+    
+        res.json({ status, response });
+    } catch (error) {
+        error.status = 404;
+        error.message = `${req.method} ${req.path} failed. Unit id could not be found`;
+        next(error);
+    }
 });
 
 router.post('/', async (req, res, next) => {
