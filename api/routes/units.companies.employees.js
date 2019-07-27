@@ -33,5 +33,19 @@ router.post('/', async(req, res, next) => {
     res.json({ status, employee });
 });
 
+router.delete('/:id', async(req, res, next) => {
+    const status = 200;
+    const unit = await Units.findById(req.params.unitId);
+
+    // const employee = await unit.companies[0].employees(req.params.id);
+    // const { employees } = await unit.companies[0].employees.id(req.params.id).remove();
+    const { employees } = await unit.companies[0];
+    const employee = await employees.id(req.params.id).remove();
+
+    unit.save();
+    res.json({ status, employee });
+
+});
+
 
 module.exports = router;
