@@ -4,19 +4,22 @@ const Units = require('../models/units');
 router.get('/', async(req, res, next) => {
     const status = 200;
 
-    //Not sure why this destructuring is not working
-    //maybe it is and I need to create a post to populate the employees part
+    //this destructuring is not working because companies needs to have the [0] 
     // const {companies: {employees} } = await Units.findById(req.params.unitId);
 
     const { companies } = await Units.findById(req.params.unitId);
-    // const employees = companies.employees;
+    const employees = companies[0].employees;
 
-    // console.log('employees', employees);
-
-    //this is not returning a unit object but instead a query object
-    //not sure how to get this working, so moved logic to the unit.companies.js
-    res.json({ status, companies });
+    res.json({ status, employees });
 });
+
+router.get('/:id', async(req, res, next) => {
+    const status = 200; 
+    const { companies } = await Units.findById(req.params.unitId);
+    const employee = await companies[0].employees.id(req.params.id)
+
+    res.json({ status, employee });
+}); 
 
 router.post('/', async(req, res, next) => {
     const status = 201;
