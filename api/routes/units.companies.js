@@ -8,10 +8,26 @@ router.get('/', async(req, res, next) => {
     res.json({ status, companies });
 });
 
+router.post('/', async(req, res, next) => {
+    const status = 201;
+    const unit = await Units.findById(req.params.unitId);
+
+    unit.companies = req.body;
+    await unit.save();
+    //not really liking this const,
+    const company = unit.companies;
+
+    res.json({ status, company });
+});
+
 router.delete('/', async(req, res, next) => {
     const status = 200;
     const unit = await Units.findById(req.params.unitId);
-    const company = unit.companies.remove();
+
+    //if there is a change where multiple companies can share one unit
+    //replace this [0] index by finding by the id and having the id be part of the params
+    const company = unit.companies[0].remove();
+
     unit.save();
 
     res.json({ status, company });

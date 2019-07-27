@@ -18,19 +18,24 @@ const schema = new Units({
     },
 
     //this might not need to be an array because there is only one company in each unit at this time
-    companies: {
-      name: {type: String, required: true}, 
-      contact_email: {type: String, required: true},
+    companies: [{
+      name: String, 
+      // name: {type: String, required: true}, 
+      contact_email: String,
+      // contact_email: {type: String, required: true},
       employees: [{
-        first_name: {type: String,required: true},
-        last_name: {type: String,required: true}, 
+        first_name: String,
+        // first_name: {type: String,required: true},
+        last_name: String,
+        // last_name: {type: String,required: true}, 
         preferred_name: String, 
         position: String, 
         date_of_birth: String, 
         //TODO: validate email 
-        email: {type: String, required: true}
+        email: String, 
+        // email: {type: String, required: true}
       }]
-    }
+    }]
   }, {createdAt: 'created_at', updatedAt: 'updated_at'}
 );
 
