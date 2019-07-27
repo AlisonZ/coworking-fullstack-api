@@ -20,6 +20,7 @@ router.post('/', async(req, res, next) => {
     res.json({ status, company });
 });
 
+//TODO: make this work --> this is not functional at all
 router.patch('/', async(req, res, next) => {
     const status = 201;
     const unit = await Units.findById(req.params.unitId);

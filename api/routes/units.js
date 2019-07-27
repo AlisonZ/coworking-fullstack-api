@@ -4,47 +4,41 @@ const Units = require('../models/units');
 
 router.get('/', async (req, res, next) => {
     const status = 200;
-    const response = await Units.find();
+    const units = await Units.find();
+    const response = [];
 
     if (req.query.kind) {
-        const filteredByKindResponse = [];
-        response.forEach((unit) => {
+        units.forEach((unit) => {
             if (unit.kind === req.query.kind) {
-                filteredByKindResponse.push(unit);
+                response.push(unit);
             }
         });
-        return res.json({ status, filteredByKindResponse });
     } else if (req.query.floor) {
-        const filteredByFloorResponse = [];
-        response.forEach((unit) => {
+        units.forEach((unit) => {
             if (unit.floor === req.query.floor) {
-                filteredByFloorResponse.push(unit);
+                response.push(unit);
             }
         });
-        return res.json({ status, filteredByFloorResponse });
+        // return res.json({ status, filteredByFloorResponse });
     } else if (req.query.occupied) {
-        const filteredByOccupiedStatusResponse = [];
-        // response.forEach((unit) => {
-        //     // console.log('unit', unit.companies.length === 0);
-
-        // })
         if(req.query.occupied === "true") {
-            response.forEach((unit) => {
+            units.forEach((unit) => {
                 if(unit.companies.length >= 1) {
-                    filteredByOccupiedStatusResponse.push(unit);
+                    response.push(unit);
                 }
             });
         } else if(req.query.occupied === "false") {
-            response.forEach((unit) => {
+            units.forEach((unit) => {
                 if(unit.companies.length === 0) {
-                    filteredByOccupiedStatusResponse.push(unit);
+                    response.push(unit);
                 }
             });
         }
-        return res.json({ status, filteredByOccupiedStatusResponse });
     } else {
-        return res.json({ status, response });
+        return res.json({ status, units });
     }
+
+    return res.json({ status, response });
 });
 
 router.get('/:id', async(req, res, next) => {
