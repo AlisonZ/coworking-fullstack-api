@@ -7,36 +7,39 @@ router.get('/', async (req, res, next) => {
     const units = await Units.find();
     const response = [];
 
-    if (req.query.kind) {
-        units.forEach((unit) => {
-            if (unit.kind === req.query.kind) {
-                response.push(unit);
-            }
-        });
-    } else if (req.query.floor) {
-        units.forEach((unit) => {
-            if (unit.floor === req.query.floor) {
-                response.push(unit);
-            }
-        });
-    } else if (req.query.occupied) {
-        if(req.query.occupied === "true") {
+    if (units.length > 0 ){
+        if (req.query.kind) {
             units.forEach((unit) => {
-                if(unit.companies.length >= 1) {
+                if (unit.kind === req.query.kind) {
                     response.push(unit);
                 }
             });
-        } else if(req.query.occupied === "false") {
+        } else if (req.query.floor) {
             units.forEach((unit) => {
-                if(unit.companies.length === 0) {
+                if (unit.floor === parseInt(req.query.floor)) {
                     response.push(unit);
                 }
             });
+        } else if (req.query.occupied) {
+            if(req.query.occupied === "true") {
+                units.forEach((unit) => {
+                    if(unit.companies.length >= 1) {
+                        response.push(unit);
+                    }
+                });
+            } else if(req.query.occupied === "false") {
+                units.forEach((unit) => {
+                    if(unit.companies.length === 0) {
+                        response.push(unit);
+                    }
+                });
+            }
+        } else {
+            return res.json({ status, units });
         }
-    } else {
-        return res.json({ status, units });
+    
     }
-
+    
     return res.json({ status, response });
 });
 
@@ -63,8 +66,9 @@ router.patch('/:id', async(req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     const status = 201;
+    const unitKinds = ["seat", "desk", "small office", "large office", "floor"];
+    const response = !unitKinds.includes(req.body.kind) ? 'this is not a valid unit type' : await Units.create(req.body);
 
-    const response = await Units.create(req.body);
     res.json({ status, response});
 });
 

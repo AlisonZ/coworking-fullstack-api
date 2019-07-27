@@ -2,22 +2,23 @@ const mongoose = require('mongoose');
 var Units = mongoose.Schema;
 
 const schema = new Units({
-    // TODO: validate that kind is one of the valid kinds of units
     kind: {
         type: String,
         required: true
     },
     floor: {
-      //TODO: change this to Number and deal with num/string conversion in route
-        type: String,
+        type: Number,
         required: true
     },
     special_monthly_offer: {
         type: Number,
         required: false
     },
-
-    companies: [{
+    //could not replicate behavior of not including company in request
+    //when kept as an object, if the company was not in the req.body
+    //continued to error because missing required fields
+    //changing back to an array fixed this, but ideally would not be an array
+    company: [{
       name: {type: String, required: true}, 
       contact_email: {type: String, required: true},
       employees: [{
