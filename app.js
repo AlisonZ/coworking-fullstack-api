@@ -20,6 +20,7 @@ app.use('/api/units', require('./api/routes/units'));
 app.use('/api/units/:unitId/companies', require('./api/routes/units.companies'));
 app.use('/api/units/:unitId/companies/employees', require('./api/routes/units.companies.employees'));
 app.use('/api/companies', require('./api/routes/companies'));
+app.use('/api/employees', require('./api/routes/employees'));
 
 const listener = () => console.log('app is working')
 app.listen(PORT, listener);
