@@ -16,7 +16,21 @@ router.get('/', async(req, res, next) => {
                 companyName.includes(searchQuery) ? response.push(unit.companies[0]) : null;
             } 
         });     
-    } else {
+    } else if(req.query.employees_lte) {
+        units.forEach((unit) => {
+            if(unit.companies[0]) {
+                unit.companies[0].employees.length <= req.query.employees_lte ? response.push(unit.companies[0]): null;
+            }
+        });    
+    }   
+        else if(req.query.employees_gte) {
+        units.forEach((unit) => {
+            if(unit.companies[0]) {
+                unit.companies[0].employees.length >= req.query.employees_gte ? response.push(unit.companies[0]): null;
+            }
+        });    
+    }     
+    else {
         units.forEach((unit) => {
             if(unit.companies[0]) {
                 response.push(unit.companies[0]);
