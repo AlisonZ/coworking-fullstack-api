@@ -80,7 +80,6 @@ router.patch('/:id/company', async(req, res, next) => {
 
 //this is for me to get some data in db to play with
 router.post('/', async (req, res, next) => {
-    console.log('in the units post', req.body);
     const status = 201;
 
     const response = await Units.create(req.body);
